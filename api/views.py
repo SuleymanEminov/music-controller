@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from .models import Room
-from .serializers import RoomSerializer, CreateRoomSerializer
+from .serializers import RoomSerializer, CreateRoomSerializer, UpdateRoomSerializer
 from rest_framework.views import APIView 
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -126,3 +126,40 @@ class LeaveRoom(APIView):
                 room.delete()
         # return response
         return Response({'Message': 'Success'}, status=status.HTTP_200_OK)
+    
+
+class UpdateRoom(APIView):
+    serializer_class = UpdateRoomSerializer
+    def patch(self,request,format=None):
+        if not self.request.session.exists(request.session.session_key):
+            # create a session
+            request.session.create()
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            guest_can_pause = serializer.data.get('guest_can_pause')
+            votes_to_skip = serializer.data.get('votes_to_skip')
+            # get session key
+            code = serializer.data.get('code')
+            # get room
+            queryset = Room.objects.filter(code=code)
+            if not queryset.exists():
+                # return error
+                return Response({'msg': 'Room not found'}, status=status.HTTP_404_NOT_FOUND)
+            # get room
+            room = queryset[0]
+            # get session key
+            user_id = self.request.session.session_key
+            # check if user is host
+            if room.host != user_id:
+                # return error
+                return Response({'msg': 'You are not the host of this room'}, status=status.HTTP_403_FORBIDDEN)
+            # update room
+            room.guest_can_pause = guest_can_pause
+            room.votes_to_skip = votes_to_skip
+            # save room
+            room.save(update_fields=['guest_can_pause', 'votes_to_skip'])
+            # return response
+            return Response(RoomSerializer(room).data, status=status.HTTP_200_OK)
+        # return error
+        return Response({'Bad Request': 'Invalid Data...'}, status=status.HTTP_400_BAD_REQUEST)
+    

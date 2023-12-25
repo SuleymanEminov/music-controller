@@ -7,6 +7,8 @@ urlpatterns = [
     path('get-room', views.GetRoom.as_view()),
     path('join-room', views.JoinRoom.as_view()),
     path('user-in-room', views.UserInRoom.as_view()),
+    path('leave-room', views.LeaveRoom.as_view()),
+    path('update-room', views.UpdateRoom.as_view()),
     # path('api/endpoint1/', views.endpoint1_view, name='endpoint1'),
     # path('api/endpoint2/', views.endpoint2_view, name='endpoint2'),
     # Add more paths for your API endpoints here
