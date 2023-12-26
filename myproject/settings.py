@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig', # Add this line
     'rest_framework', # Add this line
     'frontend.apps.FrontendConfig', # This is where you add the frontend app
+    'spotify.apps.SpotifyConfig', # Spotify
 ]
 
 MIDDLEWARE = [
