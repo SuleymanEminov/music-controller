@@ -1,3 +1,4 @@
+spotify/credentials.py
 __pycache__/
 # Ignore React build files
 build/
