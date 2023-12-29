@@ -2,9 +2,7 @@
 
 Music Controller is a full-stack web project that allows multiple users in one "room" and let's users control music choice. 
 
-This project is from youtuber Tim's (Tech With Tim) "Django & React Full Stack Web App Tutorial" series.
-
-https://www.youtube.com/playlist?list=PLzMcBGfZo4-kCLWnGmK0jUBmGLaJxvi4j
+This project is from youtuber Tim's (Tech With Tim) "Django & React Full Stack Web App Tutorial" series. [youtube link] (https://www.youtube.com/playlist?list=PLzMcBGfZo4-kCLWnGmK0jUBmGLaJxvi4j)
 
 
 # Usage
@@ -14,9 +12,17 @@ cd "path-to-app"
 ``` 
 
 ## Create a virtual environment
+1. install virtualenv
 ```bash
 pip install virtualenv
+```
+2. create virtual env
+```bash
 python -m venv env
+```
+3. activate the virtual environment
+```bash
+source env/bin/activate
 ```
 
 ## Install Required Python modules
@@ -35,7 +41,7 @@ cd into the frontend folder.
 ```bash
 cd frontend 
 ```
-Install all dependencies.
+3. Install all dependencies.
 ```bash
 npm i
 ```
