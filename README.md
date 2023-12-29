@@ -52,5 +52,5 @@ npm run build
 ```
 or for the development:
 ```bash
-npm run dev
+npm run dev --no-cache -- --no-cache
 ```
